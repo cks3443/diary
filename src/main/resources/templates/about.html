@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head th:include="fragments/layout.html :: headFragment">
+    <title id="pageTitle">Diary</title>
+</head>
+
+<body>
+<div class="hero_area">
+    <!-- header section strats -->
+    <header class="header_section" th:replace="fragments/layout.html :: headerFragment('about')">
+    </header>
+    <!-- end header section -->
+</div>
+
+<!-- about section -->
+<section class="about_section layout_padding">
+    <div class="container">
+        <div class="custom_heading-container">
+            <h3 class=" ">
+                ABOUT OUR COMPANY
+            </h3>
+        </div>
+        <p class="layout_padding2-top">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        </p>
+        <div class="img-box layout_padding2">
+            <img
+                    src="../assets/images/slider-img.jpg"
+                    th:src="@{/assets/images/slider-img.jpg}"
+                    alt=""
+            >
+        </div>
+    </div>
+</section>
+<!-- end about section -->
+
+
+<!-- footer section -->
+<section class="container-fluid footer_section">
+    <p>
+        ⓒ 머스터드 드로잉 2022
+    </p>
+</section>
+<!-- footer section -->
+
+<th:block th:insert="fragments/layout.html :: scriptFragment"></th:block>
+
+</body>
+
+</html>

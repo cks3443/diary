@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head th:fragment="headFragment">
+    <!-- Basic -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Site Metas -->
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title th:include=":: #pageTitle">Diary</title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css"
+          th:href="@{/webjars/owl-carousel2/2.3.4/dist/assets/owl.carousel.min.css}"
+    />
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css"
+          href="../assets/css/bootstrap.css"
+          th:href="@{/assets/css/bootstrap.css}"/>
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Roboto:400,700&display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/assets/css/style.css}" rel="stylesheet"/>
+    <!-- responsive style -->
+    <link th:href="@{/assets/css/responsive.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<header class="header_section" th:fragment="headerFragment (name)">
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand" href="index.html" th:href="@{/}">
+            <span>
+              Diary Translation
+            </span>
+            </a>
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
+                    <ul class="navbar-nav  ">
+                        <li class="nav-item active" th:class="${name == 'home' ? 'nav-item active' : 'nav-item'}">
+                            <a class="nav-link" href="index.html" th:href="@{/}">홈 <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active" th:class="${name == 'about' ? 'nav-item active' : 'nav-item'}">
+                            <a class="nav-link" href="about.html" th:href="@{/about}"> 소개 </a>
+                        </li>
+                        <li class="nav-item active" th:class="${name == 'diary' ? 'nav-item active' : 'nav-item'}">
+                            <a class="nav-link" href="diary.html" th:href="@{/diary}"> 일기를 쓰기</a>
+                        </li>
+                        <li class="nav-item active" th:class="${name == 'crackdiary' ? 'nav-item active' : 'nav-item'}">
+                            <a class="nav-link" href="crack_diary.html" th:href="@{/crackdiary}">일기를 풀기</a>
+                        </li>
+                        <!-- <li class="nav-item">
+                          <a class="nav-link" href="#">Login</a>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+            <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+            </form>
+        </nav>
+    </div>
+</header>
+
+<th:block th:fragment="scriptFragment">
+    <script type="text/javascript" th:src="@{/assets/js/jquery-3.4.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/assets/js/bootstrap.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/github-com-vuejs-vue/2.6.14/vue.js}"></script>
+</th:block>
+
+</body>
+</html>
