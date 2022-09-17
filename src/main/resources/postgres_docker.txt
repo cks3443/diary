@@ -1,0 +1,1 @@
+docker run --name postgres -e POSTGRES_PASSWORD=mustaddrawing -e POSTGRES_DB=diary -e POSTGRES_USER=postgres -d -p 5431:5431 postgres
