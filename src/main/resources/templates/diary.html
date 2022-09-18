@@ -25,18 +25,26 @@
                 <form action="">
                     <div>
                     <textarea placeholder="텍스트를 입력해 주세요"
-                              style="width: 100%; border: 0;padding: 15px 12px;background-color: #f2f2f2;outline: none;margin: 10px 0; height:250px;">
+                              style="width: 100%; border: 0;padding: 15px 12px;background-color: #f2f2f2;outline: none;margin: 10px 0; height:250px;"
+                              :value="content"
+                              @input="event => content = event.target.value"
+                    >
                     </textarea>
                     </div>
 
-                    <div class="d-flex justify-content-center ">
+                    <div class="d-flex justify-content-center "
+                         v-if="!save_btn_event"
+                         v-on:click="clickSaveBtnHandler($event)"
+                    >
                         <button type="button">
                             번역
                         </button>
 
                     </div>
 
-                    <div class="d-flex justify-content-center ">
+                    <div class="d-flex justify-content-center "
+                         v-if="save_btn_event"
+                    >
 
                         <button onclick="location.href='../html/index.html';" type="button">저장</button>
                         <button class="copyButton" onclick="location.href='';" type="button">복사</button>
@@ -62,6 +70,24 @@
     </p>
 </section>
 <!-- footer section -->
+
+<script>
+    const app = new Vue({
+        el: '#root',
+
+        data: {
+            save_btn_event: false,
+            content: null,
+        },
+        methods: {
+            clickSaveBtnHandler: function (e) {
+                e.preventDefault()
+
+                this.save_btn_event = true
+            }
+        }
+    })
+</script>
 
 </body>
 
