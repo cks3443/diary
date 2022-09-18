@@ -6,6 +6,10 @@
 </head>
 
 <body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&family=Roboto:ital,wght@1,300&display=swap"
+      rel="stylesheet">
 <div class="hero_area">
     <!-- header section strats -->
     <header class="header_section" th:replace="fragments/layout.html :: headerFragment('diary')">
@@ -43,18 +47,23 @@
 
                 </form>
                 <form action="" v-if="save_btn_event">
-                    <div>
-                    <textarea placeholder="텍스트를 입력해 주세요"
-                              style="width: 100%; border: 0;padding: 15px 12px;background-color: #f2f2f2;outline: none;margin: 10px 0; height:250px;"
-                              :value="content.translateSentence.text"
-                    >
-                    </textarea>
+                    <div id="domximage">
+                        <div
+                                style="width: 100%; border: 0;padding: 15px 12px;background-color: #f2f2f2;outline: none;margin: 10px 0; height:250px; font-family: 'Nanum Myeongjo', serif; font-size: 1.6em; height: fit-content;"
+                        >
+                            {{content.translateSentence.text}}
+                        </div>
                     </div>
 
                     <div class="d-flex justify-content-center "
                     >
 
-                        <button onclick="location.href='../html/index.html';" type="button">저장</button>
+                        <button
+                                type="button"
+                                v-on:click="exportPng"
+                        >
+                            저장
+                        </button>
                         <button class="copyButton" onclick="location.href='';" type="button">복사</button>
                         <button class="diaryButton" onclick="location.href='../html/secret.html';"
                                 type="button"
@@ -69,7 +78,6 @@
     </div>
 </section>
 
-<th:block th:replace="fragments/layout.html :: scriptFragment"></th:block>
 
 <!-- footer section -->
 <section class="container-fluid footer_section">
@@ -78,6 +86,11 @@
     </p>
 </section>
 <!-- footer section -->
+
+<th:block th:replace="fragments/layout.html :: scriptFragment"></th:block>
+
+<script th:src="@{/webjars/github-com-tsayen-dom-to-image/2.6.0/dom-to-image.js}"></script>
+<script th:src="@{/webjars/file-saver/dist/FileSaver.js}"></script>
 
 <script>
     const app = new Vue({
@@ -93,8 +106,6 @@
                 .then((res) => res.json())
                 .then((data) => {
                     this.content = data
-
-                    console.log(this.content)
                 })
         },
         methods: {
@@ -113,8 +124,15 @@
                         this.save_btn_event = true
                     })
 
+            },
+            exportPng: function () {
+                const dom_node = document.getElementById('domximage')
+
+                domtoimage.toBlob(dom_node)
+                    .then((blob) => {
+                        window.saveAs(blob, 'mind.png')
+                    })
             }
-            //TODO
         }
     })
 </script>
