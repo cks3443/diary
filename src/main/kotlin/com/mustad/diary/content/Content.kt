@@ -1,5 +1,6 @@
 package com.mustad.diary.content
 
+import com.mustad.diary.translate.TranslateSentence
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.Type
 import org.hibernate.annotations.UpdateTimestamp
@@ -30,6 +31,9 @@ open class Content : Serializable {
 
     @Column(name = "security_key")
     open var securityKey: String? = null
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    open var translateSentence: TranslateSentence? = null
 
 
 }

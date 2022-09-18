@@ -1,6 +1,6 @@
 package com.mustad.diary
 
-import com.mustad.diary.translate.TranslateSenteceRepository
+import com.mustad.diary.translate.TranslateSentenceRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest
 class DiaryApplicationTests {
 
     @Autowired
-    lateinit var tsentences: TranslateSenteceRepository
+    lateinit var tsentences: TranslateSentenceRepository
 
     @Test
     fun contextLoads() {
