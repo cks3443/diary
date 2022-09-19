@@ -64,7 +64,13 @@
                         >
                             저장
                         </button>
-                        <button class="copyButton" onclick="location.href='';" type="button">복사</button>
+                        <button
+                                class="copyButton"
+                                type="button"
+                                v-on:click="copyUrl"
+                        >
+                            복사
+                        </button>
                         <button class="diaryButton" onclick="location.href='../html/secret.html';"
                                 type="button"
                                 style="">비밀일기
@@ -132,6 +138,13 @@
                     .then((blob) => {
                         window.saveAs(blob, 'mind.png')
                     })
+            },
+
+            copyUrl: function () {
+
+                const url = `${window.location}/${this.content.id}`
+
+                window.navigator.clipboard.writeText(url)
             }
         }
     })
