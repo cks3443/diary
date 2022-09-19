@@ -16,75 +16,112 @@
     </header>
     <!-- end header section -->
 </div>
-
-<section class="contact_section layout_padding" id="root">
-    <div class="custom_heading-container">
-        <h3 class=" ">
-            My diary
-        </h3>
-    </div>
-    <div class="container layout_padding2-top" v-if="content != null">
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <form action="" v-if="!save_btn_event">
-                    <div>
+<div id="root" style="padding: 0px;margin: 0px;">
+    <section class="contact_section layout_padding" v-if="vw1">
+        <div class="custom_heading-container">
+            <h3 class=" ">
+                My diary
+            </h3>
+        </div>
+        <div class="container layout_padding2-top" v-if="content != null">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <form action="" v-if="!save_btn_event">
+                        <div>
                     <textarea placeholder="텍스트를 입력해 주세요"
                               style="width: 100%; border: 0;padding: 15px 12px;background-color: #f2f2f2;outline: none;margin: 10px 0; height:250px;"
                               :value="content.text"
                               @input="event => content.text = event.target.value"
                     >
                     </textarea>
-                    </div>
-
-                    <div class="d-flex justify-content-center "
-                         v-on:click="clickSaveBtnHandler($event)"
-                    >
-                        <button type="button">
-                            번역
-                        </button>
-
-                    </div>
-
-                </form>
-                <form action="" v-if="save_btn_event">
-                    <div id="domximage">
-                        <div
-                                style="width: 100%; border: 0;padding: 15px 12px;background-color: #f2f2f2;outline: none;margin: 10px 0; height:250px; font-family: 'Nanum Myeongjo', serif; font-size: 1.6em; height: fit-content;"
-                        >
-                            {{content.translateSentence.text}}
                         </div>
-                    </div>
 
-                    <div class="d-flex justify-content-center "
-                    >
-
-                        <button
-                                type="button"
-                                v-on:click="exportPng"
+                        <div class="d-flex justify-content-center "
+                             v-on:click="clickSaveBtnHandler($event)"
                         >
-                            저장
-                        </button>
-                        <button
-                                class="copyButton"
-                                type="button"
-                                v-on:click="copyUrl"
-                        >
-                            복사
-                        </button>
-                        <button class="diaryButton" onclick="location.href='../html/secret.html';"
-                                type="button"
-                                style="">비밀일기
-                        </button>
+                            <button type="button">
+                                번역
+                            </button>
 
-                    </div>
-                </form>
+                        </div>
+
+                    </form>
+                    <form action="" v-if="save_btn_event">
+                        <div id="domximage">
+                            <div
+                                    style="width: 100%; border: 0;padding: 15px 12px;background-color: #f2f2f2;outline: none;margin: 10px 0; height:250px; font-family: 'Nanum Myeongjo', serif; font-size: 1.6em; height: fit-content;"
+                            >
+                                {{content.translateSentence.text}}
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center "
+                        >
+
+                            <button
+                                    type="button"
+                                    v-on:click="exportPng"
+                            >
+                                저장
+                            </button>
+                            <button
+                                    class="copyButton"
+                                    type="button"
+                                    v-on:click="copyUrl"
+                            >
+                                복사
+                            </button>
+                            <button
+                                    class="diaryButton"
+                                    type="button"
+                                    v-on:click="clickSecretBtn"
+                            >
+                                비밀일기
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
             </div>
+
+        </div>
+    </section>
+
+
+    <!--TODO-->
+
+    <section class="contact_section layout_padding" v-if="vw2">
+        <div class="custom_heading-container">
+            <h3 class=" ">
+                Blockchain keys
+            </h3>
         </div>
 
-    </div>
-</section>
+        <div class="container layout_padding2-top">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <form action="">
+                        <div style="position: relative;">
+                            <span class="publickey1">PUBLIC:</span>
+                            <input class="publickey2" type="text" disabled value="dfefes89tyty">
+                        </div>
+                        <div>
+                            <span class="publickey1">PRIVATE:</span>
+                            <input class="publickey2" type="text" value="dfefes89tyty12degh" disabled>
+                        </div>
+                        <div class="d-flex justify-content-center ">
+                            <button type="button" onclick="location.href='../html/create.html';">암호 직접 설정하기</button>
+                            <button class="disactiveButton" type="button" onclick="location.href='../html/index.html';">
+                                닫기
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-
+        </div>
+    </section>
+</div>
 <!-- footer section -->
 <section class="container-fluid footer_section">
     <p>
@@ -105,6 +142,8 @@
         data: {
             save_btn_event: false,
             content: null,
+            vw1: true,
+            vw2: false,
         },
         mounted: function () {
 
@@ -145,6 +184,11 @@
                 const url = `${window.location}/${this.content.id}`
 
                 window.navigator.clipboard.writeText(url)
+            },
+
+            clickSecretBtn: function () {
+                this.vw1 = !this.vw1
+                this.vw2 = !this.vw2
             }
         }
     })
