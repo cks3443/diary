@@ -157,6 +157,10 @@
             clickSaveBtnHandler: function (e) {
                 e.preventDefault()
 
+                if (this.content.text == '') {
+                alert("내없이 습다")
+                }
+
                 const bod = new FormData()
 
                 bod.append('_content', JSON.stringify(this.content))

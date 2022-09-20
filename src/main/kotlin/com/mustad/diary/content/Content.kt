@@ -5,8 +5,17 @@ import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.Type
 import org.hibernate.annotations.UpdateTimestamp
 import java.io.Serializable
+import java.security.Key
+import java.security.SecureRandom
 import java.sql.Timestamp
+import java.util.*
+import javax.crypto.Cipher
+import javax.crypto.SecretKeyFactory
+import javax.crypto.spec.IvParameterSpec
+import javax.crypto.spec.PBEKeySpec
+import javax.crypto.spec.SecretKeySpec
 import javax.persistence.*
+
 
 @Entity
 @Table(name = "content")
