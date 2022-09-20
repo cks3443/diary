@@ -9,16 +9,17 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 import java.io.IOException
+import java.util.*
 import kotlin.random.Random
 
 @Controller
 @RequestMapping("/diary")
 class DiaryHtmlController(
-        private val gson: Gson,
-        private val sentences: TranslateSentenceRepository,
-        private val contents: ContentRepository,
+    private val gson: Gson,
+    private val sentences: TranslateSentenceRepository,
+    private val contents: ContentRepository,
 
-        ) {
+    ) {
 
     val DIARY = "diary"
 
@@ -32,9 +33,8 @@ class DiaryHtmlController(
     @PutMapping
     @ResponseBody
     fun postDiary(
-            _content: String,
+        _content: String,
     ): ResponseEntity<Content?> {
-
 
 
         val content = gson.fromJson(_content, Content::class.java)
@@ -61,6 +61,10 @@ class DiaryHtmlController(
             }
 
             content.translateSentence = ts
+
+            val encodeString = Base64.getUrlEncoder().encodeToString(content.text!!.toByteArray())
+
+            content.securityKey = encodeString.slice(0..15)
 
             contents.save(content)
 
