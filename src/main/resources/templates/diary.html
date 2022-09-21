@@ -131,18 +131,26 @@
                 <div class="col-md-6 mx-auto">
                     <form action="">
                         <div>
-                            <select name="" id="">
-                                <option value="" disabled selected>질문을 선택하세요</option>
-                                <option value="">제일 좋아하는 탄산음료는?</option>
-                                <option value="">제일 좋아하는 동물은?</option>
-                                <option value="">제일 좋아하는 은식은?</option>
+                            <select v-model="content.selected">
+                                <option v-for="option in options" :value="option.id">
+                                    {{ option.label }}
+                                </option>
                             </select>
                         </div>
                         <div>
-                            <input type="text" placeholder="답을 입력해주세요" value="">
+                            <input
+                                    type="text"
+                                    placeholder="답을 입력해주세요"
+                                    v-model="content.custom_answer"
+                            />
                         </div>
                         <div class="d-flex justify-content-center ">
-                            <button type="button" onclick="location.href='../html/index.html';">저장</button>
+                            <button
+                                    type="button"
+                                    v-on:click="clickCustomAnswerBtn"
+                            >
+                                저장
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -174,6 +182,12 @@
             vw1: true,
             vw2: false,
             vw_create: false,
+            options:
+                [
+                    {label: '제일 좋아하는 탄산음료는?', id: 1},
+                    {label: '제일 좋아하는 동물은?', id: 2},
+                    {label: '제일 좋아하는 음식은?', id: 3},
+                ],
         },
         mounted: function () {
 
@@ -236,7 +250,27 @@
                 this.vw2 = false
                 this.vw_create = true
 
-            }
+            },
+
+            clickCustomAnswerBtn: function () {
+
+                if (this.content.custom_answer == '') {
+                    alert("답을 작성해주세요")
+                    return
+                }
+
+                const bod = new FormData()
+
+                bod.append('_content', JSON.stringify(this.content))
+
+                fetch('/diary', {method: 'PUT', body: bod})
+                    .then((res) => res.json())
+                    .then((data) => {
+                        this.content = data
+
+                        window.location.replace('/')
+                    })
+            },
         }
     })
 </script>

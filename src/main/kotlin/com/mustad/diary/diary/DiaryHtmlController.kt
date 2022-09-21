@@ -64,7 +64,12 @@ class DiaryHtmlController(
 
             val encodeString = Base64.getUrlEncoder().encodeToString(content.text!!.toByteArray())
 
-            content.securityKey = encodeString.slice(0..15)
+            content.securityKey =
+                if (encodeString.length < 15) {
+                    encodeString
+                } else {
+                    encodeString.slice(0..14)
+                }
 
             contents.save(content)
 

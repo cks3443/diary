@@ -1,7 +1,9 @@
 package com.mustad.diary.content
 
 import com.mustad.diary.translate.TranslateSentence
+import org.hibernate.annotations.ColumnDefault
 import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.Type
 import org.hibernate.annotations.UpdateTimestamp
 import java.io.Serializable
@@ -45,4 +47,12 @@ open class Content : Serializable {
     open var translateSentence: TranslateSentence? = null
 
 
+    @Column(name = "selected")
+    @ColumnDefault("1")
+    open var selected: Int? = 1
+
+
+    @Column(name = "custom_answer", nullable = true, length = 500)
+    @ColumnDefault("")
+    open var custom_answer: String? = null
 }
