@@ -191,7 +191,7 @@
         },
         mounted: function () {
 
-            fetch('/diary/new', {method: 'POST'})
+            fetch('/content/new', {method: 'POST'})
                 .then((res) => res.json())
                 .then((data) => {
                     this.content = data

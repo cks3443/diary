@@ -43,6 +43,9 @@ open class Content : Serializable {
     @Column(name = "security_key")
     open var securityKey: String? = null
 
+    @Column(name = "public_key")
+    open var publicKey: String? = null
+
     @ManyToOne(fetch = FetchType.LAZY)
     open var translateSentence: TranslateSentence? = null
 
@@ -55,4 +58,13 @@ open class Content : Serializable {
     @Column(name = "custom_answer", nullable = true, length = 500)
     @ColumnDefault("")
     open var custom_answer: String? = null
+
+    @Column(nullable = true)
+    @ColumnDefault("0")
+    open var tried: Int? = 0
+
+    @Column(nullable = true)
+    @ColumnDefault("0")
+    open var entered: Int? = 0
+
 }

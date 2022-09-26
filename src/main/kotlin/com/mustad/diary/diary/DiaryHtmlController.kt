@@ -7,6 +7,9 @@ import com.mustad.diary.translate.TranslateSentence
 import com.mustad.diary.translate.TranslateSentenceRepository
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
+import org.springframework.ui.set
+import org.springframework.web.bind.WebDataBinder
 import org.springframework.web.bind.annotation.*
 import java.io.IOException
 import java.util.*
@@ -22,6 +25,8 @@ class DiaryHtmlController(
     ) {
 
     val DIARY = "diary"
+
+    val CRACK = "crack_diary"
 
     @GetMapping
     fun getDiary(
@@ -71,6 +76,15 @@ class DiaryHtmlController(
                     encodeString.slice(0..14)
                 }
 
+            val encodeString2 = Base64.getUrlEncoder().encodeToString(content.securityKey!!.toByteArray())
+
+            content.publicKey =
+                if (encodeString2.length < 15) {
+                    encodeString2
+                } else {
+                    encodeString2.slice(0..14)
+                }
+
             contents.save(content)
 
             val ent = ResponseEntity.ok(content)
@@ -88,4 +102,16 @@ class DiaryHtmlController(
     @PostMapping("/new")
     @ResponseBody
     fun postNew() = ResponseEntity.ok(Content())
+
+    @GetMapping("/{id}")
+    fun getContentWithId(
+        @PathVariable id: Int,
+        model: Model,
+    ): String {
+
+        model["id"] = id
+
+        return CRACK
+    }
+
 }
